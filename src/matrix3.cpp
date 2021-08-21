@@ -1,19 +1,19 @@
 #include <matrix3.h>
 #include <iostream>
 
-using namespace physics;
+using namespace math;
 
-Matrix3::Matrix3()
+Matrix3::Matrix3() noexcept
 {
     setDiagonal(1.0f);
 }
 
-Matrix3::Matrix3(float value)
+Matrix3::Matrix3(float value) noexcept
 {
     setDiagonal(value);
 }
 
-Matrix3::Matrix3(float v1, float v2, float v3)
+Matrix3::Matrix3(float v1, float v2, float v3) noexcept
 {
     entries[0] = v1;
     entries[1] = 0.0f;
@@ -28,7 +28,7 @@ Matrix3::Matrix3(float v1, float v2, float v3)
     entries[8] = v3;
 }
 
-void Matrix3::setDiagonal(float value)
+void Matrix3::setDiagonal(float value) noexcept
 {
     entries[0] = value;
     entries[1] = 0.0f;
@@ -43,7 +43,7 @@ void Matrix3::setDiagonal(float value)
     entries[8] = value;
 }
 
-Matrix3 Matrix3::transpose() const
+Matrix3 Matrix3::transpose() const noexcept
 {
     Matrix3 result(entries[0], entries[4], entries[8]);
 
@@ -64,12 +64,9 @@ Matrix3 Matrix3::inverse() const
         - entries[1] * (entries[3]*entries[8] - entries[5]*entries[6])
         + entries[2] * (entries[3]*entries[7] - entries[4]*entries[6]);
 
-    /* 행렬식이 0 이면 역행렬이 존재하지 않는다 */
+    // Matrix's inverse doesn't exist if determinant is zero
     if (determinant == 0.0f)
-    {
-        std::cout << "MATRIX3::This matrix's inverse does not exist." << std::endl;
-        return *this;
-    }
+        throw std::runtime_error("Matrix3::Matrix doesn't have its inverse");
 
     determinant = 1.0f / determinant;
     Matrix3 result;
@@ -87,47 +84,39 @@ Matrix3 Matrix3::inverse() const
     return result;
 }
 
-Matrix3 Matrix3::operator+(const Matrix3& other) const
+Matrix3 Matrix3::operator+(const Matrix3& other) const noexcept
 {
     Matrix3 result;
 
     for (int i = 0; i < 9; ++i)
-    {
         result.entries[i] = entries[i] + other.entries[i];
-    }
 
     return result;
 }
 
-void Matrix3::operator+=(const Matrix3& other)
+void Matrix3::operator+=(const Matrix3& other) noexcept
 {
     for (int i = 0; i < 9; ++i)
-    {
         entries[i] += other.entries[i];
-    }
 }
 
-Matrix3 Matrix3::operator-(const Matrix3& other) const
+Matrix3 Matrix3::operator-(const Matrix3& other) const noexcept
 {
     Matrix3 result;
 
     for (int i = 0; i < 9; ++i)
-    {
         result.entries[i] = entries[i] - other.entries[i];
-    }
 
     return result;
 }
 
-void Matrix3::operator-=(const Matrix3& other)
+void Matrix3::operator-=(const Matrix3& other) noexcept
 {
     for (int i = 0; i < 9; ++i)
-    {
         entries[i] -= other.entries[i];
-    }
 }
 
-Matrix3 Matrix3::operator*(const Matrix3& other) const
+Matrix3 Matrix3::operator*(const Matrix3& other) const noexcept
 {
     Matrix3 result;
 
@@ -155,7 +144,7 @@ Matrix3 Matrix3::operator*(const Matrix3& other) const
     return result;
 }
 
-void Matrix3::operator*=(const Matrix3& other)
+void Matrix3::operator*=(const Matrix3& other) noexcept
 {
     Matrix3 result;
 
@@ -183,7 +172,7 @@ void Matrix3::operator*=(const Matrix3& other)
     *this = result;
 }
 
-Vector3 Matrix3::operator*(const Vector3& vec) const
+Vector3 Matrix3::operator*(const Vector3& vec) const noexcept
 {
     return Vector3(
         entries[0]*vec.x + entries[1]*vec.y + entries[2]*vec.z,
@@ -192,27 +181,23 @@ Vector3 Matrix3::operator*(const Vector3& vec) const
     );
 }
 
-Matrix3 Matrix3::operator*(const float value) const
+Matrix3 Matrix3::operator*(const float value) const noexcept
 {
     Matrix3 result;
 
     for (int i = 0; i < 9; ++i)
-    {
         result.entries[i] *= value;
-    }
 
     return result;
 }
 
-void Matrix3::operator*=(const float value)
+void Matrix3::operator*=(const float value) noexcept
 {
     for (int i = 0; i < 9; ++i)
-    {
         entries[i] *= value;
-    }
 }
 
-Matrix3& Matrix3::operator=(const Matrix3& other)
+Matrix3& Matrix3::operator=(const Matrix3& other) noexcept
 {
     for (int i = 0; i < 9; ++i)
         entries[i] = other.entries[i];
