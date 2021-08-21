@@ -50,6 +50,6 @@ namespace math
 
         const float operator[](unsigned int idx) const;
     };
-} // namespace physics
+} // namespace math
 
-#endif // VECTOR3_H
+#endif // VECTOR3_H_
