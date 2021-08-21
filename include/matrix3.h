@@ -10,6 +10,7 @@ namespace math
 {
     class Matrix3
     {
+    public:
         // Data is stored as row-wise format
         float entries[9];
 
@@ -29,6 +30,9 @@ namespace math
 
         // Return inversed matrix
         Matrix3 inverse() const;
+
+        // Print this matrix
+        void print() const noexcept;
 
         // Operator overloading
 

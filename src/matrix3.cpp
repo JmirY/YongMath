@@ -84,6 +84,16 @@ Matrix3 Matrix3::inverse() const
     return result;
 }
 
+void Matrix3::print() const noexcept
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        for (int j = 0; j < 3; ++j)
+            std::cout << entries[3*i + j] << ' ';
+        std::cout << std::endl;
+    }
+}
+
 Matrix3 Matrix3::operator+(const Matrix3& other) const noexcept
 {
     Matrix3 result;
