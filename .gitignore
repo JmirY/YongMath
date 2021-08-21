@@ -1,0 +1,6 @@
+*.dSYM
+.vscode
+.DS_Store
+
+# Test source & binary
+test*
