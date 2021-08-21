@@ -4,7 +4,7 @@
 
 using namespace math;
 
-void Vector3::normalize()
+void Vector3::normalize() noexcept
 {
     float mag = magnitude();
     if (mag != 0.0f)
@@ -16,23 +16,23 @@ void Vector3::normalize()
     }
 }
 
-float Vector3::magnitude() const
+float Vector3::magnitude() const noexcept
 {
     float sum = x*x + y*y + z*z;
     return sqrt(sum);
 }
 
-float Vector3::magnitudeSquared() const
+float Vector3::magnitudeSquared() const noexcept
 {
     return x*x + y*y + z*z;
 }
 
-float Vector3::dot(const Vector3& other) const
+float Vector3::dot(const Vector3& other) const noexcept
 {
     return x*other.x + y*other.y + z*other.z;
 }
 
-Vector3 Vector3::cross(const Vector3& other) const
+Vector3 Vector3::cross(const Vector3& other) const noexcept
 {
     return Vector3(
         y*other.z - z*other.y,
@@ -41,46 +41,46 @@ Vector3 Vector3::cross(const Vector3& other) const
     );
 }
 
-void Vector3::reset(const float value)
+void Vector3::reset(const float value) noexcept
 {
     x = y = z = value;
 }
 
-void Vector3::print() const
+void Vector3::print() const noexcept
 {
     std::cout << "[ " << x << ", " << y << ", " << z << " ]\n";
 }
 
-Vector3 Vector3::operator+(const Vector3& other) const
+Vector3 Vector3::operator+(const Vector3& other) const noexcept
 {
     return Vector3(x + other.x, y + other.y, z + other.z);
 }
 
-void Vector3::operator+=(const Vector3& other)
+void Vector3::operator+=(const Vector3& other) noexcept
 {
     x += other.x;
     y += other.y;
     z += other.z;
 }
 
-Vector3 Vector3::operator-(const Vector3& other) const
+Vector3 Vector3::operator-(const Vector3& other) const noexcept
 {
     return Vector3(x - other.x, y - other.y, z - other.z);
 }
 
-void Vector3::operator-=(const Vector3& other)
+void Vector3::operator-=(const Vector3& other) noexcept
 {
     x -= other.x;
     y -= other.y;
     z -= other.z;
 }
 
-Vector3 Vector3::operator*(const float value) const
+Vector3 Vector3::operator*(const float value) const noexcept
 {
     return Vector3(x * value, y * value, z * value);
 }
 
-void Vector3::operator*=(const float value)
+void Vector3::operator*=(const float value) noexcept
 {
     x *= value;
     y *= value;
