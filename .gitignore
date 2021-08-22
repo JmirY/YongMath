@@ -2,5 +2,8 @@
 .vscode
 .DS_Store
 
-# Test source & binary
-test*
+# Test directory
+test
+
+# Build directory
+build
