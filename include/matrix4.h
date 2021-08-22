@@ -1,54 +1,57 @@
-#ifndef MATRIX4_H
-#define MATRIX4_H
+// 4 X 4 Matrix class
+// By JmirY
+
+#ifndef MATRIX4_H_
+#define MATRIX4_H_
 
 #include "vector3.h"
 
 namespace math
 {
-    struct Matrix4
+    class Matrix4
     {
+    public:
+        // Data is stored as row-wise format
         float entries[16];
 
-        /* 생성자 */
-        Matrix4();            // 단위행렬로 초기화
-        Matrix4(float value); // 행렬의 대각성분 (diagonal entry) 을 주어진 값으로 초기화
-        Matrix4(float v1, float v2, float v3, float v4);
+        // Constructor
 
-        /* 행렬의 대각성분을 주어진 값으로 설정한다
-            나머지 성분은 0으로 설정한다 */
-        void setDiagonal(float value);
+        // Initialize matrix as identity matrix
+        Matrix4() noexcept;
+        // Initialize matrix whose diagonal entries are given value
+        Matrix4(float value) noexcept;
+        Matrix4(float v1, float v2, float v3, float v4) noexcept;
 
-        /* 행렬의 전치행렬을 반환한다 */
-        Matrix4 transpose() const;
+        // Set diagonal entries to given value
+        void setDiagonal(float value) noexcept;
 
-        /* 행렬의 역행렬을 반환한다 */
+        // Return transposed matrix
+        Matrix4 transpose() const noexcept;
+
+        // Return inversed matrix
         Matrix4 inverse() const;
 
-        /*****************
-         * 연산자 오버로딩 *
-         *****************/
+        // Print this matrix
+        void print() const noexcept;
 
-        /* 행렬끼리 더하기 */
-        Matrix4 operator+(const Matrix4& other) const;
-        void operator+=(const Matrix4& other);
+        // Operator overloading
 
-        /* 행렬끼리 빼기 */
-        Matrix4 operator-(const Matrix4& other) const;
-        void operator-=(const Matrix4& other);
+        Matrix4 operator+(const Matrix4& other) const noexcept;
+        void operator+=(const Matrix4& other) noexcept;
 
-        /* 행렬끼리 곱하기 */
-        Matrix4 operator*(const Matrix4& other) const;
-        void operator*=(const Matrix4& other);
+        Matrix4 operator-(const Matrix4& other) const noexcept;
+        void operator-=(const Matrix4& other) noexcept;
 
-        /* 벡터와 곱하기 */
-        Vector3 operator*(const Vector3& vec) const;
+        Matrix4 operator*(const Matrix4& other) const noexcept;
+        void operator*=(const Matrix4& other) noexcept;
 
-        /* 실수와 곱하기 */
-        Matrix4 operator*(const float value) const;
-        void operator*=(const float value);
+        Vector3 operator*(const Vector3& vec) const noexcept;
 
-        Matrix4& operator=(const Matrix4& other);
-    };    
-} // namespace physics
+        Matrix4 operator*(const float value) const noexcept;
+        void operator*=(const float value) noexcept;
 
-#endif // MATRIX4_H
+        Matrix4& operator=(const Matrix4& other) noexcept;
+    };
+} // namespace math
+
+#endif // MATRIX4_H_
