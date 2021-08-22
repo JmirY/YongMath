@@ -14,42 +14,42 @@ namespace math
         float z;
 
         // Constructor
-        Vector3(float _x = 0.0f, float _y = 0.0f, float _z = 0.0f)
+        Vector3(float _x = 0.0f, float _y = 0.0f, float _z = 0.0f) noexcept
             : x(_x), y(_y), z(_z) {}
 
         // Normalize this vector
-        void normalize();
+        void normalize() noexcept;
 
         // Return magnitude of this vector
-        float magnitude() const;
+        float magnitude() const noexcept;
         // Return magnitude squared
-        float magnitudeSquared() const;
+        float magnitudeSquared() const noexcept;
 
         // Return dot product of this vector and parameter
-        float dot(const Vector3& other) const;
+        float dot(const Vector3& other) const noexcept;
 
         // Return cross product of this vector and parameter
-        Vector3 cross(const Vector3& other) const;
+        Vector3 cross(const Vector3& other) const noexcept;
 
         // Reset this vector by given value
-        void reset(const float value = 0.0f);
+        void reset(const float value = 0.0f) noexcept;
 
         // Print this vector to standard output
-        void print() const;
+        void print() const noexcept;
 
         // Operator overloading
 
-        Vector3 operator+(const Vector3& other) const;
-        void operator+=(const Vector3& other);
+        Vector3 operator+(const Vector3& other) const noexcept;
+        void operator+=(const Vector3& other) noexcept;
 
-        Vector3 operator-(const Vector3& other) const;
-        void operator-=(const Vector3& other);
+        Vector3 operator-(const Vector3& other) const noexcept;
+        void operator-=(const Vector3& other) noexcept;
 
-        Vector3 operator*(const float value) const;
-        void operator*=(const float value);
+        Vector3 operator*(const float value) const noexcept;
+        void operator*=(const float value) noexcept;
 
         const float operator[](unsigned int idx) const;
     };
-} // namespace physics
+} // namespace math
 
-#endif // VECTOR3_H
+#endif // VECTOR3_H_
