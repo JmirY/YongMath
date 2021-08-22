@@ -1,11 +1,14 @@
-#ifndef QUATERNION_H
-#define QUATERNION_H
+// Quaternion class
+// By JmirY
+
+#ifndef QUATERNION_H_
+#define QUATERNION_H_
 
 #include "vector3.h"
 
 namespace math
 {
-    /* 크기가 1 인 단위 사원수만 3차원 회전을 표현할 수 있다 */
+    // Only unit quaternion can represent orientation
     struct Quaternion
     {
         float w;
@@ -13,33 +16,33 @@ namespace math
         float y;
         float z;
 
-        /* 생성자 */
-        Quaternion() : w(1.0f), x(0.0f), y(0.0f), z(0.0f) {}
-        Quaternion(float _w, float _x, float _y, float _z)
+        // Constructor
+        Quaternion(float _w = 1.0f, float _x = 0.0f, float _y = 0.0f, float _z = 0.0f) noexcept
             : w(_w), x(_x), y(_y), z(_z) {}
+
+        // Return magnitude of this quaternion
+        float magnitude() const noexcept;
     
-        /* 사원수의 크기를 1 로 만든다 */
-        void normalize();
+        // Normalize this quaternion
+        void normalize() noexcept;
 
-        /* 주어진 벡터만큼 회전한 사원수를 반환한다 */
-        Quaternion rotateByScaledVector(const Vector3& vec, const float scale) const;
+        // Return quaternion rotated by given vector (which representing rotation)
+        Quaternion rotateByVector(const Vector3& vec) const noexcept;
 
-        /*****************
-         * 연산자 오버로딩 *
-         *****************/
+        // Operator overloading
 
-        /* 사원수끼리 더한다 */
-        Quaternion operator+(const Quaternion& other) const;
-        void operator+=(const Quaternion& other);
+        Quaternion operator+(const Quaternion& other) const noexcept;
+        void operator+=(const Quaternion& other) noexcept;
 
-        /* 사원수끼리 곱한다 */
-        Quaternion operator*(const Quaternion& other) const;
-        void operator*=(const Quaternion& other);
+        Quaternion operator-(const Quaternion& other) const noexcept;
+        void operator-=(const Quaternion& other) noexcept;
 
-        /* 실수와 곱한다 */
-        Quaternion operator*(const float value) const;
-        void operator*=(const float value);
+        Quaternion operator*(const Quaternion& other) const noexcept;
+        void operator*=(const Quaternion& other) noexcept;
+
+        Quaternion operator*(const float value) const noexcept;
+        void operator*=(const float value) noexcept;
     };
-} // namespace physics
+} // namespace math
 
-#endif // QUATERNION_H
+#endif // QUATERNION_H_
