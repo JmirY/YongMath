@@ -98,8 +98,7 @@ Matrix3 Matrix3::operator+(const Matrix3& other) const noexcept
 {
     Matrix3 result;
 
-    for (int i = 0; i < 9; ++i)
-        result.entries[i] = entries[i] + other.entries[i];
+    result += other;
 
     return result;
 }
@@ -114,8 +113,7 @@ Matrix3 Matrix3::operator-(const Matrix3& other) const noexcept
 {
     Matrix3 result;
 
-    for (int i = 0; i < 9; ++i)
-        result.entries[i] = entries[i] - other.entries[i];
+    result -= other;
 
     return result;
 }
@@ -130,26 +128,7 @@ Matrix3 Matrix3::operator*(const Matrix3& other) const noexcept
 {
     Matrix3 result;
 
-    result.entries[0] = entries[0] * other.entries[0] +
-        entries[1] * other.entries[3] + entries[2] * other.entries[6];
-    result.entries[1] = entries[0] * other.entries[1] +
-        entries[1] * other.entries[4] + entries[2] * other.entries[7];
-    result.entries[2] = entries[0] * other.entries[2] +
-        entries[1] * other.entries[5] + entries[2] * other.entries[8];
-
-    result.entries[3] = entries[3] * other.entries[0] +
-        entries[4] * other.entries[3] + entries[5] * other.entries[6];
-    result.entries[4] = entries[3] * other.entries[1] +
-        entries[4] * other.entries[4] + entries[5] * other.entries[7];
-    result.entries[5] = entries[3] * other.entries[2] +
-        entries[4] * other.entries[5] + entries[5] * other.entries[8];
-
-    result.entries[6] = entries[6] * other.entries[0] +
-        entries[7] * other.entries[3] + entries[8] * other.entries[6];
-    result.entries[7] = entries[6] * other.entries[1] +
-        entries[7] * other.entries[4] + entries[8] * other.entries[7];
-    result.entries[8] = entries[6] * other.entries[2] +
-        entries[7] * other.entries[5] + entries[8] * other.entries[8];
+    result *= other;
 
     return result;
 }
@@ -195,8 +174,7 @@ Matrix3 Matrix3::operator*(const float value) const noexcept
 {
     Matrix3 result;
 
-    for (int i = 0; i < 9; ++i)
-        result.entries[i] *= value;
+    result *= value;
 
     return result;
 }
